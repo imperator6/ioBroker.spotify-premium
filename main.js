@@ -1778,8 +1778,9 @@ function listenOnPlayUri(obj) {
 
     clearTimeout(application.statusInternalTimer);
 	
-    adapter.log.info(' send as object: ' + send);
-	adapter.log.info(' send as string: ' + JSON.stringify(send));
+    
+    adapter.log.info(' send as string: ' + JSON.stringify(send));
+    adapter.log.info('query: ' + JSON.stringify(query));
     sendRequest('/v1/me/player/play?' + querystring.stringify(query), 'PUT', JSON.stringify(send), true).catch(function(err) {
         adapter.log.error('could not execute command: ' + err);
     }).then(function() {
