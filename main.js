@@ -1764,10 +1764,13 @@ function listenOnPlaylistList(obj) {
 
 function listenOnPlayUri(obj) {
 	let query = {
-        device_id: getSelectedDevice(deviceData)
-    };
-
-	let send = obj.state.val;
+		device_id: getSelectedDevice(deviceData)
+	};
+	
+	// we pass a string, so that we see JSON string in the oject explorer
+	 adapter.log.info('obj.val: ' + obj.state.val);
+	
+	let send = JSON.parse(obj.state.val);
 	if (!isEmpty(send["device_id"])) {
 		query.device_id = send["device_id"];
 		delete send["device_id"];
@@ -1775,7 +1778,8 @@ function listenOnPlayUri(obj) {
 
     clearTimeout(application.statusInternalTimer);
 	
-    adapter.log.info(send);
+    adapter.log.info(' send as object: ' + send);
+	adapter.log.info(' send as string: ' + JSON.stringify(send));
     sendRequest('/v1/me/player/play?' + querystring.stringify(query), 'PUT', JSON.stringify(send), true).catch(function(err) {
         adapter.log.error('could not execute command: ' + err);
     }).then(function() {
