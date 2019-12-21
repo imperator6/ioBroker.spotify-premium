@@ -1782,7 +1782,7 @@ function listenOnPlayUri(obj) {
     clearTimeout(application.statusInternalTimer);
 
     sendRequest('/v1/me/player/play?' + querystring.stringify(query), 'PUT', JSON.stringify(send), true).catch(function(err) {
-        adapter.log.error('could not execute command: ' + err);
+        adapter.log.error('/v1/me/player/play? could not execute command: ' + err);
     }).then(function() {
         setTimeout(pollStatusApi, 1000);
     })
