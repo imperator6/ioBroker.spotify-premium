@@ -202,7 +202,7 @@ function sendRequest(endpoint, method, sendBody, delayAccepted) {
         },
         form: sendBody
     };
-    adapter.log.debug('spotify api call...' + endpoint + '; ' + options.form);
+    adapter.log.debug('spotify api call... ' + options.url + '; ' + options.form);
     let callStack = new Error().stack;
     return request(options)
         .then(function(response) {
